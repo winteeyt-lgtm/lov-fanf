@@ -75,6 +75,23 @@
             color: #aaa;
             margin-bottom: 20px;
         }
+        .heart {
+    position: fixed;
+    bottom: -20px;
+    color: rgba(255, 0, 100, 0.15); /* Еле заметный розовый */
+    font-size: 18px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fly 6s linear forwards;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
     </style>
 </head>
 <body>
@@ -356,4 +373,19 @@
 </script>
 
 </body>
+    <script>
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️'; 
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 2 + 4 + 's';
+        
+        document.body.appendChild(heart);
+        
+        setTimeout(() => { heart.remove(); }, 6000);
+    }
+    // По одному сердечку каждые 600мс, чтобы не спамить
+    setInterval(createHeart, 600);
+    </script>
 </html>
